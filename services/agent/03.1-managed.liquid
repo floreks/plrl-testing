@@ -1,0 +1,20 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-03.1-testing-managed
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/03-crd
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  configuration:
+    testScenario: "crd-mixed"
+    enableCustomHealth: "true"
+    pipelineGateEnabled: "true"
