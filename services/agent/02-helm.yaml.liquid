@@ -16,8 +16,9 @@ spec:
     namespace: testing
   helm:
     chart: agent-test
-    valuesFiles:
-    - values.yaml
+    git:
+      folder: resources/agent/02-helm
+      ref: main
     values:
       testMode: true
       replicaCount: 2
