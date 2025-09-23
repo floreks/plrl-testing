@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mirror
+  namespace: testing
+  labels:
+    plural.sh/test: "mirror"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      plural.sh/test: "mirror"
+  template:
+    metadata:
+      labels:
+        plural.sh/test: "mirror"
+    spec:
+      containers:
+        - name: busybox
+          image: busybox:latest
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo 'Hello from busybox'; sleep 10; done"]
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
