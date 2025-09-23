@@ -31,14 +31,12 @@ spec:
   namespace: {{ namespace }}
   repositoryRef:
     name: {{ name }}
-    namespace: {{ namespace }}
   git:
     folder: services/agent
     ref: main
   configuration:
     cluster: {{ cluster }}
     repositoryName: {{ name }}
-    repositoryNamespace: {{ namespace }}
   clusterRef:
     kind: Cluster
     name: mgmt
