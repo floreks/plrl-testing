@@ -63,21 +63,3 @@ spec:
       - name: detach-config
         configMap:
           name: detachment-test-config
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: detachment-test-pvc
-  namespace: testing
-  labels:
-    app: detachment-test-app
-    test-scenario: detachment-test
-    test-type: persistent-storage
-    preserve-on-detach: "{{ configuration.preserveResources }}"
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
