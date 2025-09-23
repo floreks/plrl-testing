@@ -15,10 +15,6 @@ spec:
     name: {{ configuration.cluster }}
     namespace: testing
   configuration:
-  - name: testScenario
-    value: "detachment-test"
-  - name: preserveResources
-    value: "true"
-  - name: detachmentMode
-    value: "graceful"
-
+    testScenario: "detachment-test"
+    preserveResources: "true"
+    detachmentMode: "graceful"

@@ -15,10 +15,6 @@ spec:
     name: {{ configuration.cluster }}
     namespace: testing
   configuration:
-  - name: testScenario
-    value: "error-handling"
-  - name: simulateErrors
-    value: "true"
-  - name: errorType
-    value: "deployment-failure"
-
+    testScenario: "error-handling"
+    simulateErrors: "true"
+    errorType: "deployment-failure"
