@@ -1,4 +1,4 @@
-{% assign cluster = configuration.cluster | default "floreks-kind" %}
+{% assign cluster = configuration.cluster | default: "floreks-kind" %}
 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: Cluster
