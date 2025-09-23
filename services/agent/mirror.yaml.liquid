@@ -5,6 +5,9 @@ metadata:
   namespace: testing
 spec:
   namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+    namespace: {{ configuration.repositoryNamespace }}
   git:
     folder: resources/agent/mirror
     ref: main
