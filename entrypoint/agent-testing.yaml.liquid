@@ -11,12 +11,25 @@ spec:
 ---
 
 apiVersion: deployments.plural.sh/v1alpha1
+kind: GitRepository
+metadata:
+  name: agent-testing
+  namespace: testing
+spec:
+  url: https://github.com/floreks/agent-testing
+
+---
+
+apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
   name: agent-testing
   namespace: testing
 spec:
   namespace: testing
+  repositoryRef:
+    name: agent-testing
+    namespace: testing
   git:
     folder: services/agent
     ref: main
