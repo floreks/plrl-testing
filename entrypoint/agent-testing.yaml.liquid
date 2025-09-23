@@ -1,0 +1,28 @@
+{% assign cluster = configuration.cluster | default "floreks-kind" %}
+
+apiVersion: deployments.plural.sh/v1alpha1
+kind: Cluster
+metadata:
+  name: {{ cluster }}
+  namespace: testing
+spec:
+  handle: {{ cluster }}
+
+---
+
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-testing
+  namespace: testing
+spec:
+  namespace: testing
+  git:
+    folder: services/agent/mirror
+    ref: main
+  configuration:
+    cluster: {{ cluster }}
+  clusterRef:
+    kind: Cluster
+    name: {{ cluster }}
+    namespace: testing
