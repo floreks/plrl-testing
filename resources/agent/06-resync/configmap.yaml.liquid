@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resync-test-config
+  namespace: testing
+  labels:
+    app: resync-test-app
+    test-scenario: resync-test
+    test-type: configmap
+data:
+  default.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+        
+        location / {
+            add_header X-Resync-Test "enabled";
+            add_header X-Test-Scenario "{{ configuration.testScenario }}";
+            add_header X-Resync-Interval "{{ configuration.resyncInterval }}";
+            root /usr/share/nginx/html;
+            index index.html;
+        }
+        
+        location /health {
+            access_log off;
+            add_header Content-Type text/plain;
+            return 200 "healthy - resync test active\n";
+        }
+        
+        location /ready {
+            access_log off;
+            add_header Content-Type text/plain;
+            return 200 "ready - resync interval: {{ configuration.resyncInterval }}\n";
+        }
+        
+        location /resync-status {
+            access_log off;
+            add_header Content-Type application/json;
+            return 200 '{"status":"active","interval":"{{ configuration.resyncInterval }}","scenario":"{{ configuration.testScenario }}"}';
+        }
+    }
+  resync-config.yaml: |
+    resync:
+      enabled: {{ configuration.triggerResync }}
+      interval: "{{ configuration.resyncInterval }}"
+      scenario: "{{ configuration.testScenario }}"
+    testing:
+      mode: "resync-validation"
+      checks:
+        - "deployment-update"
+        - "configmap-change"
+        - "service-endpoint-update"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: resync-test-service
+  namespace: testing
+  labels:
+    app: resync-test-app
+    test-scenario: resync-test
+    test-type: service
+spec:
+  selector:
+    app: resync-test-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  type: ClusterIP
+

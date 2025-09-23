@@ -1,0 +1,31 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-02-testing-helm
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/02-helm
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  helm:
+    chart: agent-test
+    valuesFiles:
+    - values.yaml
+    values:
+      testMode: true
+      replicaCount: 2
+      image:
+        tag: "latest"
+  configuration:
+  - name: testScenario
+    value: "helm-templates"
+  - name: enableMetrics
+    value: "true"
+

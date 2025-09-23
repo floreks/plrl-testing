@@ -1,16 +1,24 @@
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
-  name: agent-01-testing-mirror
+  name: agent-06-testing-resync
   namespace: testing
 spec:
   namespace: testing
   repositoryRef:
     name: {{ configuration.repositoryName }}
   git:
-    folder: resources/agent/mirror
+    folder: resources/agent/06-resync
     ref: main
   clusterRef:
     kind: Cluster
     name: {{ configuration.cluster }}
     namespace: testing
+  configuration:
+  - name: testScenario
+    value: "resync-test"
+  - name: triggerResync
+    value: "true"
+  - name: resyncInterval
+    value: "30s"
+

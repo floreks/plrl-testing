@@ -1,0 +1,32 @@
+apiVersion: testing.plural.sh/v1alpha1
+kind: TestResource
+metadata:
+  name: test-instance-1
+  namespace: testing
+  labels:
+    test-scenario: crd-mixed
+    test-type: crd-instance
+spec:
+  testName: "agent-crd-test-1"
+  replicas: 3
+  config:
+    environment: "testing"
+    logLevel: "debug"
+    enableMetrics: "true"
+---
+apiVersion: testing.plural.sh/v1alpha1
+kind: TestResource2
+metadata:
+  name: test-instance-2-non-existent
+  namespace: testing
+  labels:
+    test-scenario: crd-mixed
+    test-type: crd-instance
+spec:
+  testName: "agent-crd-test-2"
+  replicas: 1
+  config:
+    environment: "staging"
+    logLevel: "info"
+    enableMetrics: "false"
+

@@ -1,0 +1,49 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: testresources.testing.plural.sh
+  labels:
+    test-scenario: crd-mixed
+    test-type: crd
+spec:
+  group: testing.plural.sh
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              testName:
+                type: string
+              replicas:
+                type: integer
+                minimum: 1
+                maximum: 10
+              config:
+                type: object
+                additionalProperties:
+                  type: string
+          status:
+            type: object
+            properties:
+              phase:
+                type: string
+                enum: ["Pending", "Running", "Failed", "Succeeded"]
+              message:
+                type: string
+              lastUpdated:
+                type: string
+                format: date-time
+  scope: Namespaced
+  names:
+    plural: testresources
+    singular: testresource
+    kind: TestResource
+    shortNames:
+    - tr
+

@@ -1,14 +1,14 @@
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
-  name: agent-02-testing-raw
+  name: agent-01-testing-mirror
   namespace: testing
 spec:
   namespace: testing
   repositoryRef:
     name: {{ configuration.repositoryName }}
   git:
-    folder: resources/agent/raw
+    folder: resources/agent/07-mirror
     ref: main
   clusterRef:
     kind: Cluster

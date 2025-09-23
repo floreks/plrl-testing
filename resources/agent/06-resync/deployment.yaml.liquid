@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resync-test-app
+  namespace: testing
+  labels:
+    app: resync-test-app
+    test-scenario: resync-test
+    test-type: resync-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: resync-test-app
+  template:
+    metadata:
+      labels:
+        app: resync-test-app
+        test-scenario: resync-test
+      annotations:
+        resync-trigger: "{{ configuration.triggerResync }}"
+        resync-interval: "{{ configuration.resyncInterval }}"
+        last-update: "{{ now | date: "2006-01-02T15:04:05Z" }}"
+    spec:
+      containers:
+      - name: resync-app
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: RESYNC_ENABLED
+          value: "{{ configuration.triggerResync }}"
+        - name: RESYNC_INTERVAL
+          value: "{{ configuration.resyncInterval }}"
+        - name: TEST_SCENARIO
+          value: "{{ configuration.testScenario }}"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        volumeMounts:
+        - name: config
+          mountPath: /etc/nginx/conf.d
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: config
+        configMap:
+          name: resync-test-config
+

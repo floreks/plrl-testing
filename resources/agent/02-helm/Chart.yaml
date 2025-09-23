@@ -1,0 +1,7 @@
+apiVersion: v2
+name: agent-test
+description: A Helm chart for testing agent deployment capabilities
+type: application
+version: 0.1.0
+appVersion: "1.0"
+

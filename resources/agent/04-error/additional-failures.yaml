@@ -1,0 +1,88 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: failing-job
+  namespace: testing
+  labels:
+    app: failing-job
+    test-scenario: error-handling
+    test-type: failing-job
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: failing-job
+        test-scenario: error-handling
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: failing-job-container
+        image: busybox:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Job starting with failure simulation"
+          echo "TEST_SCENARIO: error-handling"
+          sleep 10
+          echo "Simulating job failure"
+          exit 1
+        env:
+        - name: FAIL_MODE
+          value: "job-failure"
+        - name: TEST_SCENARIO
+          value: "error-handling"
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "10m"
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: invalid-service
+  namespace: testing
+  labels:
+    app: invalid-service
+    test-scenario: error-handling
+    test-type: invalid-service
+spec:
+  selector:
+    app: non-existent-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: error-config
+  namespace: testing
+  labels:
+    test-scenario: error-handling
+    test-type: error-configmap
+data:
+  error-types: |
+    - image-pull-error
+    - crashloop-backoff
+    - job-failure
+    - service-endpoint-unavailable
+    - resource-quota-exceeded
+  test-config.yaml: |
+    errorHandling:
+      enabled: true
+      scenarios:
+        - name: "deployment-failure"
+          type: "image-pull-error"
+        - name: "pod-crashloop"
+          type: "crashloop-backoff"
+        - name: "job-failure"
+          type: "job-failure"
+

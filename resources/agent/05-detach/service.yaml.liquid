@@ -1,0 +1,100 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: detachment-test-config
+  namespace: testing
+  labels:
+    app: detachment-test-app
+    test-scenario: detachment-test
+    test-type: configmap
+    preserve-on-detach: "{{ configuration.preserveResources }}"
+data:
+  detachment.conf: |
+    [detachment]
+    mode={{ configuration.detachmentMode }}
+    preserve_resources={{ configuration.preserveResources }}
+    test_scenario={{ configuration.testScenario }}
+    
+    [validation]
+    check_resource_preservation=true
+    verify_service_independence=true
+    validate_recreation_capability=true
+
+  nginx.conf: |
+    events {
+        worker_connections 1024;
+    }
+    http {
+        server {
+            listen 80;
+            location / {
+                add_header X-Detachment-Mode "{{ configuration.detachmentMode }}";
+                add_header X-Preserve-Resources "{{ configuration.preserveResources }}";
+                add_header X-Test-Scenario "{{ configuration.testScenario }}";
+                add_header X-Managed-By "plural-agent";
+                root /usr/share/nginx/html;
+                index index.html;
+            }
+            location /health {
+                access_log off;
+                return 200 "healthy - detachment test active\n";
+                add_header Content-Type text/plain;
+            }
+            location /ready {
+                access_log off;
+                return 200 "ready - preserve mode: {{ configuration.preserveResources }}\n";
+                add_header Content-Type text/plain;
+            }
+            location /detachment-status {
+                access_log off;
+                add_header Content-Type application/json;
+                return 200 '{"mode":"{{ configuration.detachmentMode }}","preserve":"{{ configuration.preserveResources }}","managed":"plural-agent"}';
+            }
+        }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: detachment-test-service
+  namespace: testing
+  labels:
+    app: detachment-test-app
+    test-scenario: detachment-test
+    test-type: service
+    preserve-on-detach: "{{ configuration.preserveResources }}"
+spec:
+  selector:
+    app: detachment-test-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: detachment-test-secret
+  namespace: testing
+  labels:
+    app: detachment-test-app
+    test-scenario: detachment-test
+    test-type: secret
+    preserve-on-detach: "{{ configuration.preserveResources }}"
+type: Opaque
+stringData:
+  detachment-config.json: |
+    {
+      "detachmentMode": "{{ configuration.detachmentMode }}",
+      "preserveResources": {{ configuration.preserveResources }},
+      "testScenario": "{{ configuration.testScenario }}",
+      "managedBy": "plural-agent",
+      "validation": {
+        "checkResourcePreservation": true,
+        "verifyServiceIndependence": true,
+        "validateRecreationCapability": true
+      }
+    }
+
