@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hooks-waves-skip-default
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: skip
+    # intentionally no sync-wave annotation -> default wave handling
+  labels:
+    scenario: hooks-waves
+    phase: skip
+    wave: "0" # expected controller default
+    app: hooks-waves
+    managed-by: plural-test
+data:
+  note: "skip default wave (no explicit wave annotation) should never apply"
+

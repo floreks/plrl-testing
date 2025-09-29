@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hooks-sync-0
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: hooks-test
+    phase: sync
+    wave: "0"
+    scenario: hooks-basic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hooks-test
+      component: sync-deployment
+  template:
+    metadata:
+      labels:
+        app: hooks-test
+        component: sync-deployment
+    spec:
+      containers:
+      - name: sync
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SCENARIO
+          value: {{ configuration.testScenario | quote }}
+        - name: WAVE
+          value: "0"
+---
+

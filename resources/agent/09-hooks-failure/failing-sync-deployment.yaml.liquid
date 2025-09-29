@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hooks-failure-sync-bad
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    scenario: hooks-failure
+    phase: sync
+    wave: "0"
+    app: hooks-failure-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hooks-failure-test
+      component: failing-sync
+  template:
+    metadata:
+      labels:
+        app: hooks-failure-test
+        component: failing-sync
+    spec:
+      containers:
+      - name: bad
+        # Intentionally invalid image to force ImagePullBackOff / failure
+        image: invalid.registry.local/does-not-exist:totallybroken
+        imagePullPolicy: Always
+        command: ["/bin/sh","-c","echo failing && sleep 3600"]
+        env:
+        - name: SCENARIO
+          value: hooks-failure
+

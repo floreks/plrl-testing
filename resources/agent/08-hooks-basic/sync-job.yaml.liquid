@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hooks-sync-2-job
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "2"
+  labels:
+    app: hooks-test
+    phase: sync
+    wave: "2"
+    scenario: hooks-basic
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: hooks-test
+        component: sync-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: sync-job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo sync wave 2 job; sleep 5"]
+

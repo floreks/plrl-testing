@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hooks-failure-skip
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: skip
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    scenario: hooks-failure
+    phase: skip
+    wave: "0"
+    app: hooks-failure-test
+data:
+  note: "should be skipped even in failure scenario"
+

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hooks-waves-sync-pos-1
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "1"
+  labels:
+    scenario: hooks-waves
+    phase: sync
+    wave: "1"
+    app: hooks-waves
+    managed-by: plural-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hooks-waves
+      component: sync-pos-1
+  template:
+    metadata:
+      labels:
+        app: hooks-waves
+        component: sync-pos-1
+    spec:
+      containers:
+      - name: pos1
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo sync wave 1; sleep 2"]
+

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hooks-failure-post-sync
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: post-sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    scenario: hooks-failure
+    phase: post-sync
+    wave: "0"
+    app: hooks-failure-test
+data:
+  note: "should NOT run because sync phase fails beforehand"
+

@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hooks-failure-sync-fail
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync-fail
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    scenario: hooks-failure
+    phase: sync-fail
+    wave: "0"
+    app: hooks-failure-test
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        scenario: hooks-failure
+        app: hooks-failure-test
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: sync-fail-handler
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo sync-fail hook executed; exit 0"]
+
