@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: quay.io/fedora/postgresql-13:latest
+        image: ghcr.io/cloudnative-pg/postgresql:14.19
         ports:
         - containerPort: 5432
         env:

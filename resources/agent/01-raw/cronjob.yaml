@@ -16,7 +16,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: backup
-            image: quay.io/fedora/postgresql-13:latest
+            image: ghcr.io/cloudnative-pg/postgresql:14.19
             command:
             - /bin/bash
             - -c
