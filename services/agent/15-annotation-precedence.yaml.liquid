@@ -1,0 +1,21 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-15-testing-annotation-precedence
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/15-annotation-precedence
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  configuration:
+    testScenario: "annotation-precedence"
+    description: "Validate annotation precedence order: deployment.plural.sh/sync-wave > argocd.argoproj.io/sync-wave > helm.sh/hook-weight > default"
+
+

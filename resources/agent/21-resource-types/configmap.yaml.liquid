@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: resource-types-configmap
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: resource-types-test
+    scenario: resource-types
+data:
+  info: "ConfigMap with pre-sync hook"

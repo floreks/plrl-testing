@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: precedence-no-wave
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+  labels:
+    app: precedence-test
+    scenario: annotation-precedence
+    priority: "default"
+data:
+  info: "no wave annotation - should use default ordering"
+

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: precedence-plural-argocd-helm
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "15"
+    helm.sh/hook-weight: "20"
+  labels:
+    app: precedence-test
+    scenario: annotation-precedence
+    priority: "plural-highest"
+data:
+  info: "all three annotations - should prefer deployment.plural.sh (wave 3, not 15 or 20)"
+

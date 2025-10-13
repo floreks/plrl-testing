@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: complex-sync-fail-handler
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync-fail
+    deployment.plural.sh/sync-wave: "0"
+    deployment.plural.sh/sync-hook-delete-policy: hook-succeeded,hook-failed
+  labels:
+    app: complex-scenario-test
+    scenario: complex-scenario
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: complex-scenario-test
+        component: sync-fail-handler
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: handler
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo handling sync failures; sleep 2"]
+

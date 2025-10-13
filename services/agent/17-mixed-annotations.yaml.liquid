@@ -1,0 +1,21 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-17-testing-mixed-annotations
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/17-mixed-annotations
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  configuration:
+    testScenario: "mixed-annotations"
+    description: "Validate behavior when mixing deployment.plural.sh, helm.sh, and argocd.argoproj.io annotations on the same resources"
+
+

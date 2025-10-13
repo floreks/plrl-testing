@@ -1,0 +1,21 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-18-testing-complex-scenario
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/18-complex-scenario
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  configuration:
+    testScenario: "complex-scenario"
+    description: "Complex real-world scenario with all phases, multiple waves, delete policies, and various resource types"
+
+

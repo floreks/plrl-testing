@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: resource-types-service
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "6"
+  labels:
+    app: resource-types-test
+    scenario: resource-types
+spec:
+  selector:
+    app: resource-types-test
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+

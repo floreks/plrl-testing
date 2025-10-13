@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zero-wave-all-phases-pre
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: zero-wave-test
+    scenario: zero-wave-phases
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: zero-wave-test
+        phase: pre-sync
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo pre-sync wave 0; sleep 1"]
+

@@ -1,0 +1,21 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-24-testing-zero-wave-phases
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/24-zero-wave-phases
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  configuration:
+    testScenario: "zero-wave-phases"
+    description: "Validate that all phases execute in correct order when all have wave 0"
+
+

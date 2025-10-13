@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: complex-post-sync-1
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: post-sync
+    deployment.plural.sh/sync-wave: "1"
+  labels:
+    app: complex-scenario-test
+    scenario: complex-scenario
+    wave: "1"
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: complex-scenario-test
+        component: post-sync-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo post-sync wave 1; sleep 2"]
+

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: resource-types-statefulset
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "7"
+  labels:
+    app: resource-types-test
+    scenario: resource-types
+spec:
+  serviceName: resource-types-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resource-types-test
+      component: stateful
+  template:
+    metadata:
+      labels:
+        app: resource-types-test
+        component: stateful
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+

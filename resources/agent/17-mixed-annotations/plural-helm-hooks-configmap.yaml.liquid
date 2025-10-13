@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mixed-plural-helm-hooks
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync
+    helm.sh/hook: pre-install
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: mixed-annotations-test
+    scenario: mixed-annotations
+data:
+  info: "resource with both plural and helm hook annotations"

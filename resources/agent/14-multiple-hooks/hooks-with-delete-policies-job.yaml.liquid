@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multiple-hooks-with-delete-policies
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync,post-sync
+    deployment.plural.sh/sync-wave: "2"
+    deployment.plural.sh/sync-hook-delete-policy: hook-succeeded,hook-failed
+  labels:
+    app: multiple-hooks-test
+    scenario: multiple-hooks
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: multiple-hooks-test
+        component: multiple-with-delete
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo multiple hooks with delete policies; sleep 2"]
+

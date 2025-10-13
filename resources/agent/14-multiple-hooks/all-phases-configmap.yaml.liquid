@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multiple-hooks-all-phases
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync,sync,post-sync
+    deployment.plural.sh/sync-wave: "1"
+  labels:
+    app: multiple-hooks-test
+    scenario: multiple-hooks
+data:
+  info: "configmap with pre-sync, sync, and post-sync hooks"
+

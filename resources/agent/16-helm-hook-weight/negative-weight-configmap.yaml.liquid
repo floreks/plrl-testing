@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-weight-negative
+  namespace: testing
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-weight: "-10"
+  labels:
+    app: helm-weight-test
+    scenario: helm-hook-weight
+data:
+  info: "helm hook-weight -10 - should execute first"

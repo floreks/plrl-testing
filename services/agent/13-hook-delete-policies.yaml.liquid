@@ -1,0 +1,21 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-13-testing-hook-delete-policies
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  git:
+    folder: resources/agent/13-hook-delete-policies
+    ref: main
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+  configuration:
+    testScenario: "hook-delete-policies"
+    description: "Validate hook deletion policies (hook-succeeded, hook-failed) for both deployment.plural.sh and helm.sh annotations"
+
+

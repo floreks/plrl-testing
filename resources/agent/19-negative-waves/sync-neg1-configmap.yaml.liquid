@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: negative-waves-sync-neg1
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "-1"
+  labels:
+    app: negative-waves-test
+    scenario: negative-waves
+data:
+  info: "sync wave -1"
+

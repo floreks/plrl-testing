@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-waves-sync-5
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    argocd.argoproj.io/sync-wave: "5"
+  labels:
+    app: argocd-waves-test
+    phase: sync
+    scenario: argocd-waves
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: argocd-waves-test
+      component: sync-deployment
+  template:
+    metadata:
+      labels:
+        app: argocd-waves-test
+        component: sync-deployment
+    spec:
+      containers:
+      - name: sync
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: WAVE
+          value: "5"
+

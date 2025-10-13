@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hook-no-delete-policy
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: post-sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: hook-delete-test
+    phase: post-sync
+    scenario: hook-delete-policies
+data:
+  info: "no delete policy - should remain after sync"
+

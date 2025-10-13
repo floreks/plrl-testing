@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: same-wave-pre-sync-a
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync
+    deployment.plural.sh/sync-wave: "5"
+  labels:
+    app: same-wave-test
+    scenario: same-wave-ordering
+    resource: "a"
+data:
+  info: "pre-sync wave 5 - resource A"

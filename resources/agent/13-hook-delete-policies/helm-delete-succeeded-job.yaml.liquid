@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: helm-hook-delete-succeeded
+  namespace: testing
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: hook-succeeded
+  labels:
+    app: hook-delete-test
+    phase: post-install
+    scenario: hook-delete-policies
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: hook-delete-test
+        component: helm-delete-succeeded
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo helm hook with delete policy; sleep 2"]
+

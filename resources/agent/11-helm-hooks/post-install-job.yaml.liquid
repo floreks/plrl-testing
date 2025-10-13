@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: helm-hooks-post-install-job
+  namespace: testing
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-weight: "2"
+  labels:
+    app: helm-hooks-test
+    phase: post-install
+    scenario: helm-hooks
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: helm-hooks-test
+        component: post-install-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: post-install
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo post-install hook executed; sleep 3"]
+

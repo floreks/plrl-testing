@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multiple-hooks-pre-post-sync
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync,post-sync
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: multiple-hooks-test
+    scenario: multiple-hooks
+data:
+  info: "job with both pre-sync and post-sync hooks"
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: multiple-hooks-test
+        component: pre-post-sync
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: job
+          image: busybox:1.36
+          command: ["/bin/sh","-c","echo multiple hooks test; sleep 2"]

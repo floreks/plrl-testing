@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: resource-types-job
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: post-sync
+    deployment.plural.sh/sync-wave: "0"
+    deployment.plural.sh/sync-hook-delete-policy: hook-succeeded
+  labels:
+    app: resource-types-test
+    scenario: resource-types
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: resource-types-test
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo post-sync job; sleep 2"]
+

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-hooks-pre-install
+  namespace: testing
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-weight: "0"
+  labels:
+    app: helm-hooks-test
+    phase: pre-install
+    scenario: helm-hooks
+data:
+  info: "helm pre-install hook configmap"

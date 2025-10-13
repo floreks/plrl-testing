@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-types-deployment
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "5"
+  labels:
+    app: resource-types-test
+    scenario: resource-types
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resource-types-test
+  template:
+    metadata:
+      labels:
+        app: resource-types-test
+    spec:
+      serviceAccountName: resource-types-sa
+      containers:
+      - name: app
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+

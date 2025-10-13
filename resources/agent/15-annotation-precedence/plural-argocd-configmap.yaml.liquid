@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: precedence-plural-argocd
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "10"
+  labels:
+    app: precedence-test
+    scenario: annotation-precedence
+    priority: "plural-over-argocd"
+data:
+  info: "both deployment.plural.sh and argocd annotations - should prefer deployment.plural.sh (wave 2, not 10)"
+

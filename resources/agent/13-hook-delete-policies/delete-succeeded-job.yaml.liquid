@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hook-delete-succeeded-job
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync
+    deployment.plural.sh/sync-wave: "0"
+    deployment.plural.sh/sync-hook-delete-policy: hook-succeeded
+  labels:
+    app: hook-delete-test
+    phase: pre-sync
+    scenario: hook-delete-policies
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: hook-delete-test
+        component: delete-succeeded
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: job
+          image: busybox:1.36
+          command: ["/bin/sh","-c","echo job succeeds, should be deleted; sleep 2"]

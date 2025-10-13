@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multiple-helm-hooks
+  namespace: testing
+  annotations:
+    helm.sh/hook: pre-install,post-install,pre-upgrade,post-upgrade
+    helm.sh/hook-weight: "5"
+  labels:
+    app: multiple-hooks-test
+    scenario: multiple-hooks
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: multiple-hooks-test
+        component: helm-multiple
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo helm multiple hooks test; sleep 2"]
+

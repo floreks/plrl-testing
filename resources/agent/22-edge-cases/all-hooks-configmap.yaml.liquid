@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: edge-case-all-hooks-combined
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync,sync,post-sync,sync-fail,skip
+    deployment.plural.sh/sync-wave: "0"
+  labels:
+    app: edge-cases-test
+    scenario: edge-cases
+data:
+  info: "resource with all possible hook phases including skip"
+

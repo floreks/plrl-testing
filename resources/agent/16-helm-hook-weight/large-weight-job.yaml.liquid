@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: helm-weight-large
+  namespace: testing
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-weight: "100"
+  labels:
+    app: helm-weight-test
+    scenario: helm-hook-weight
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: helm-weight-test
+        component: large-weight
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo helm hook-weight 100 - should execute last; sleep 2"]
+

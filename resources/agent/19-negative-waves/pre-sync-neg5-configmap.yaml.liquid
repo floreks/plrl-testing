@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: negative-waves-pre-sync-neg5
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync
+    deployment.plural.sh/sync-wave: "-5"
+  labels:
+    app: negative-waves-test
+    scenario: negative-waves
+data:
+  info: "pre-sync wave -5"
+

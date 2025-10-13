@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: complex-skip
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: skip
+  labels:
+    app: complex-scenario-test
+    scenario: complex-scenario
+data:
+  info: "this should be skipped during sync"
+

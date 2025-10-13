@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: edge-case-very-large-wave
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: sync
+    deployment.plural.sh/sync-wave: "9999"
+  labels:
+    app: edge-cases-test
+    scenario: edge-cases
+data:
+  info: "resource with very large wave value"
+

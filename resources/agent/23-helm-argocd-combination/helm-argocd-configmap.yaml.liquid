@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: helm-argocd-combination-a
+  namespace: testing
+  annotations:
+    helm.sh/hook: pre-install,post-install
+    argocd.argoproj.io/sync-wave: "3"
+    helm.sh/hook-weight: "7"
+  labels:
+    app: helm-argocd-combo-test
+    scenario: helm-argocd-combination
+data:
+  info: "combining helm hooks with argocd waves"

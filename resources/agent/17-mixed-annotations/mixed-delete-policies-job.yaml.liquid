@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mixed-hooks-delete-policy
+  namespace: testing
+  annotations:
+    deployment.plural.sh/sync-hook: pre-sync,post-sync
+    helm.sh/hook: pre-install
+    deployment.plural.sh/sync-wave: "2"
+    deployment.plural.sh/sync-hook-delete-policy: hook-succeeded
+    helm.sh/hook-delete-policy: hook-failed
+  labels:
+    app: mixed-annotations-test
+    scenario: mixed-annotations
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: mixed-annotations-test
+        component: mixed-delete-policies
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job
+        image: busybox:1.36
+        command: ["/bin/sh","-c","echo mixed hooks with both delete policies; sleep 2"]
+
