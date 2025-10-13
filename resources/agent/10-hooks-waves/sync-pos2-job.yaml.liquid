@@ -24,6 +24,5 @@ spec:
       restartPolicy: Never
       containers:
       - name: sync-pos2
-        image: busybox:1.36
+        image: quay.io/prometheus/busybox:latest
         command: ["/bin/sh","-c","echo sync wave 2; sleep 2"]
-

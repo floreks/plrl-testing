@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: app-container
-    image: alpine:latest
+    image: quay.io/prometheus/busybox:latest
     command: ["sh", "-c", "echo 'Hello from standalone pod' && sleep 3600"]
     resources:
       requests:
@@ -27,4 +27,3 @@ spec:
         fieldRef:
           fieldPath: status.podIP
   restartPolicy: Always
-

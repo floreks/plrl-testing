@@ -23,6 +23,5 @@ spec:
       restartPolicy: Never
       containers:
       - name: job
-        image: busybox:1.36
+        image: quay.io/prometheus/busybox:latest
         command: ["/bin/sh","-c","echo mixed hooks with both delete policies; sleep 2"]
-

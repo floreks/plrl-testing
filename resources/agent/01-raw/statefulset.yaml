@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: postgres:13
+        image: quay.io/fedora/postgresql-13:latest
         ports:
         - containerPort: 5432
         env:
@@ -48,4 +48,3 @@ spec:
       resources:
         requests:
           storage: 20Gi
-

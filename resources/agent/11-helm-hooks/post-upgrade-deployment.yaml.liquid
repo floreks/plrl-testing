@@ -24,10 +24,9 @@ spec:
     spec:
       containers:
       - name: post-upgrade
-        image: nginx:1.25-alpine
+        image: quay.io/nginx/nginx-unprivileged:alpine
         ports:
         - containerPort: 80
         env:
         - name: HOOK_TYPE
           value: "post-upgrade"
-

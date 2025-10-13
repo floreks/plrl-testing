@@ -24,7 +24,6 @@ spec:
     spec:
       containers:
       - name: app
-        image: nginx:1.25-alpine
+        image: quay.io/nginx/nginx-unprivileged:alpine
         ports:
         - containerPort: 80
-

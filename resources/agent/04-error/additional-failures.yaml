@@ -18,7 +18,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: failing-job-container
-        image: busybox:latest
+        image: quay.io/prometheus/busybox:latest
         command:
         - /bin/sh
         - -c
@@ -85,4 +85,3 @@ data:
           type: "crashloop-backoff"
         - name: "job-failure"
           type: "job-failure"
-

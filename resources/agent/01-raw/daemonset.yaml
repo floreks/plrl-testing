@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: fluentd
-        image: fluentd:v1.14-1
+        image: quay.io/fluentd_elasticsearch/fluentd:latest
         resources:
           requests:
             cpu: 100m
@@ -36,4 +36,3 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-

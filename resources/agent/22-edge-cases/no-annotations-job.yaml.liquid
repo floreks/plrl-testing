@@ -16,6 +16,5 @@ spec:
       restartPolicy: Never
       containers:
       - name: job
-        image: busybox:1.36
+        image: quay.io/prometheus/busybox:latest
         command: ["/bin/sh","-c","echo job with no sync annotations; sleep 2"]
-

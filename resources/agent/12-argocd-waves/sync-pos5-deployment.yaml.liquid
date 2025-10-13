@@ -24,10 +24,9 @@ spec:
     spec:
       containers:
       - name: sync
-        image: nginx:1.25-alpine
+        image: quay.io/nginx/nginx-unprivileged:alpine
         ports:
         - containerPort: 80
         env:
         - name: WAVE
           value: "5"
-

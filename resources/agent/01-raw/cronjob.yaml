@@ -16,7 +16,7 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: backup
-            image: postgres:13
+            image: quay.io/fedora/postgresql-13:latest
             command:
             - /bin/bash
             - -c
@@ -45,4 +45,3 @@ spec:
               claimName: backup-pvc
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
-

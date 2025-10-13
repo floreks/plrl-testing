@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: web-container
-        image: nginx:1.21
+        image: quay.io/nginx/nginx-unprivileged:alpine
         ports:
         - containerPort: 80
         resources:
@@ -43,4 +43,3 @@ spec:
             port: 80
           initialDelaySeconds: 5
           periodSeconds: 5
-

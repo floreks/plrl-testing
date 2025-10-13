@@ -21,6 +21,5 @@ spec:
       restartPolicy: Never
       containers:
       - name: handler
-        image: busybox:1.36
+        image: quay.io/prometheus/busybox:latest
         command: ["/bin/sh","-c","echo handling sync failures; sleep 2"]
-

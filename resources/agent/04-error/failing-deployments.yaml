@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
       - name: crashloop-container
-        image: busybox:latest
+        image: quay.io/prometheus/busybox:latest
         command: ["/bin/sh", "-c", "echo 'Starting container...'; sleep 5; echo 'Simulating crash'; exit 1"]
         env:
         - name: FAIL_MODE
@@ -72,4 +72,3 @@ spec:
           limits:
             memory: "64Mi"
             cpu: "50m"
-

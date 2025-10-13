@@ -21,6 +21,6 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - name: job
-          image: busybox:1.36
-          command: ["/bin/sh","-c","echo job succeeds, should be deleted; sleep 2"]
+      - name: job
+        image: quay.io/prometheus/busybox:latest
+        command: ["/bin/sh","-c","echo job succeeds, should be deleted; sleep 2"]

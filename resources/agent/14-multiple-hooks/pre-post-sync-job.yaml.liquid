@@ -22,5 +22,5 @@ spec:
       restartPolicy: Never
       containers:
         - name: job
-          image: busybox:1.36
+          image: quay.io/prometheus/busybox:latest
           command: ["/bin/sh","-c","echo multiple hooks test; sleep 2"]
