@@ -1,0 +1,22 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: agent-25-cert-manager-startupcheck
+  namespace: testing
+spec:
+  namespace: testing
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
+  helm:
+    url: https://charts.jetstack.io
+    version: x.x.x
+    chart: cert-manager
+    values:
+      startupapicheck:
+        enabled: true
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
+
+
