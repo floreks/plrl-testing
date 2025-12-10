@@ -7,9 +7,6 @@ spec:
   namespace: testing
   repositoryRef:
     name: {{ configuration.repositoryName }}
-  git:
-    folder: resources/agent/26-invalid-file-renderer-issue
-    ref: main
   helm:
     repositoryRef:
       name: {{ configuration.repositoryName }}
