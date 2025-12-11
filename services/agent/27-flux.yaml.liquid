@@ -4,16 +4,16 @@ metadata:
   name: 27-flux
   namespace: testing
 spec:
+  namespace: testing
   reconciliation:
     driftDetection: true
     interval: 1m
   repositoryRef:
     name: {{ configuration.repositoryName }}
   helm:
-    url: https://github.com/fluxcd-community/helm-charts.git
-    git:
-      ref: main
-      folder: charts/flux2
+    url:  oci://registry-1.docker.io/bitnamicharts/flux
+    version: x.x.x
+    chart: flux
   clusterRef:
     kind: Cluster
     name: {{ configuration.cluster }}
