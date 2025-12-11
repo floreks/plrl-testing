@@ -11,9 +11,9 @@ spec:
   repositoryRef:
     name: {{ configuration.repositoryName }}
   helm:
-    url:  oci://registry-1.docker.io/bitnamicharts/flux
+    url: https://fluxcd-community.github.io/helm-charts
     version: x.x.x
-    chart: flux
+    chart: fluxcd-community/flux2
   clusterRef:
     kind: Cluster
     name: {{ configuration.cluster }}
