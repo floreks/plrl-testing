@@ -7,6 +7,8 @@ spec:
   reconciliation:
     driftDetection: true
     interval: 1m
+  repositoryRef:
+    name: {{ configuration.repositoryName }}
   helm:
     url: https://github.com/fluxcd-community/helm-charts.git
     git:
