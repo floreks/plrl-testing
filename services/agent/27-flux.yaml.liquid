@@ -1,0 +1,18 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: 27-flux
+  namespace: testing
+spec:
+  reconciliation:
+    driftDetection: true
+    interval: 1m
+  helm:
+    url: https://github.com/fluxcd-community/helm-charts.git
+    git:
+      ref: main
+      folder: charts/flux2
+  clusterRef:
+    kind: Cluster
+    name: {{ configuration.cluster }}
+    namespace: testing
