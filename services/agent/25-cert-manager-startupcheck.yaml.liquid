@@ -1,24 +1,24 @@
-apiVersion: deployments.plural.sh/v1alpha1
-kind: ServiceDeployment
-metadata:
-  name: agent-25-cert-manager-startupcheck
-  namespace: testing
-spec:
-  namespace: testing
-  repositoryRef:
-    name: {{ configuration.repositoryName }}
-  helm:
-    url: https://charts.jetstack.io
-    version: x.x.x
-    chart: cert-manager
-    values:
-      crds:
-        enabled: true
-      startupapicheck:
-        enabled: true
-  clusterRef:
-    kind: Cluster
-    name: {{ configuration.cluster }}
-    namespace: testing
-
-
+{% comment %}apiVersion: deployments.plural.sh/v1alpha1{% endcomment %}
+{% comment %}kind: ServiceDeployment{% endcomment %}
+{% comment %}metadata:{% endcomment %}
+  {% comment %}name: agent-25-cert-manager-startupcheck{% endcomment %}
+  {% comment %}namespace: testing{% endcomment %}
+{% comment %}spec:{% endcomment %}
+  {% comment %}namespace: testing{% endcomment %}
+  {% comment %}repositoryRef:{% endcomment %}
+    {% comment %}name: {{ configuration.repositoryName }}{% endcomment %}
+  {% comment %}helm:{% endcomment %}
+    {% comment %}url: https://charts.jetstack.io{% endcomment %}
+    {% comment %}version: x.x.x{% endcomment %}
+    {% comment %}chart: cert-manager{% endcomment %}
+    {% comment %}values:{% endcomment %}
+      {% comment %}crds:{% endcomment %}
+        {% comment %}enabled: true{% endcomment %}
+      {% comment %}startupapicheck:{% endcomment %}
+        {% comment %}enabled: true{% endcomment %}
+  {% comment %}clusterRef:{% endcomment %}
+    {% comment %}kind: Cluster{% endcomment %}
+    {% comment %}name: {{ configuration.cluster }}{% endcomment %}
+    {% comment %}namespace: testing{% endcomment %}
+{% comment %}{% endcomment %}
+{% comment %}{% endcomment %}
