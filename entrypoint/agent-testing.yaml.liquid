@@ -41,3 +41,25 @@ spec:
         kind: Cluster
         name: mgmt
         namespace: infra
+
+---
+
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+    name: flux-testing
+    namespace: {{ namespace }}
+spec:
+    namespace: {{ namespace }}
+    repositoryRef:
+        name: {{ name }}
+    git:
+        folder: services/flux
+        ref: main
+    configuration:
+        cluster: {{ cluster }}
+        repositoryName: {{ name }}
+    clusterRef:
+        kind: Cluster
+        name: mgmt
+        namespace: infra
