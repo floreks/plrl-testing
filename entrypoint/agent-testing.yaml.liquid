@@ -1,43 +1,43 @@
-{% assign cluster = configuration.cluster | default: "floreks-kind" %}
+{% assign cluster = configuration.cluster | default: "floreks" %}
 {% assign name = "agent-testing" %}
 {% assign namespace = "testing" %}
 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: Cluster
 metadata:
-  name: {{ cluster }}
-  namespace: {{ namespace }}
+    name: {{ cluster }}
+    namespace: {{ namespace }}
 spec:
-  handle: {{ cluster }}
+    handle: {{ cluster }}
 
 ---
 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: GitRepository
 metadata:
-  name: {{ name }}
-  namespace: {{ namespace }}
+    name: {{ name }}
+    namespace: {{ namespace }}
 spec:
-  url: https://github.com/floreks/plrl-testing.git
+    url: https://github.com/floreks/plrl-testing.git
 
 ---
 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
-  name: {{ name }}
-  namespace: {{ namespace }}
-spec:
-  namespace: {{ namespace }}
-  repositoryRef:
     name: {{ name }}
-  git:
-    folder: services/agent
-    ref: main
-  configuration:
-    cluster: {{ cluster }}
-    repositoryName: {{ name }}
-  clusterRef:
-    kind: Cluster
-    name: mgmt
-    namespace: infra
+    namespace: {{ namespace }}
+spec:
+    namespace: {{ namespace }}
+    repositoryRef:
+        name: {{ name }}
+    git:
+        folder: services/agent
+        ref: main
+    configuration:
+        cluster: {{ cluster }}
+        repositoryName: {{ name }}
+    clusterRef:
+        kind: Cluster
+        name: mgmt
+        namespace: infra
