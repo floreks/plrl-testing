@@ -1,0 +1,16 @@
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+    name: flux-02-semver
+    namespace: testing
+spec:
+    namespace: testing
+    repositoryRef:
+        name: {{ configuration.repositoryName }}
+    git:
+        folder: resources/flux/02-semver
+        ref: main
+    clusterRef:
+        kind: Cluster
+        name: {{ configuration.cluster }}
+        namespace: testing

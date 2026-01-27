@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: redis-semver-mismatch
+  namespace: apps
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: redis
+      version: "< 16"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: apps
