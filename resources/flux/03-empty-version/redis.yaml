@@ -4,6 +4,7 @@ metadata:
   name: redis-empty-version
   namespace: apps
 spec:
+  releaseName: redis-empty-version
   interval: 10m
   chart:
     spec:

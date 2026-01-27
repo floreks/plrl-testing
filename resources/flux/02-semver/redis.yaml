@@ -4,6 +4,7 @@ metadata:
   name: redis-semver
   namespace: apps
 spec:
+  releaseName: redis-semver
   interval: 10m
   chart:
     spec:

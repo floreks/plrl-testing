@@ -4,6 +4,7 @@ metadata:
   name: redis-semver-mismatch
   namespace: apps
 spec:
+  releaseName: redis-semver-mismatch
   interval: 10m
   chart:
     spec:
