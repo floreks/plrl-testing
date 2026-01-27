@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: redis-empty-version
-  namespace: apps
+  namespace: 03-empty-version
 spec:
   releaseName: redis-empty-version
   interval: 10m

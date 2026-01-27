@@ -2,7 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: redis-semver-mismatch
-  namespace: apps
+  namespace: 04-semver-mismatch
 spec:
   releaseName: redis-semver-mismatch
   interval: 10m
