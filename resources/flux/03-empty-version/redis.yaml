@@ -8,7 +8,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: bitnami/redis
+      chart: redis
       sourceRef:
         kind: HelmRepository
         name: bitnami
