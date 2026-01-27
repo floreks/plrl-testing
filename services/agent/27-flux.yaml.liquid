@@ -14,10 +14,6 @@ spec:
         url: https://fluxcd-community.github.io/helm-charts
         version: x.x.x
         chart: flux2
-        values:
-            helmController:
-                extraEnv:
-                    HELM_DRIVER: configmap
     clusterRef:
         kind: Cluster
         name: {{ configuration.cluster }}
