@@ -46,4 +46,84 @@ spec:
     kind: TestResource
     shortNames:
     - tr
-
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: random-agent-config
+  namespace: testing
+  labels:
+    test-scenario: crd-mixed
+    test-type: configmap
+data:
+  APP_MODE: "chaos"
+  FEATURE_FLAGS: "widgets,metrics,debug-panel"
+  LOG_LEVEL: "trace"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: random-agent-secret
+  namespace: testing
+  labels:
+    test-scenario: crd-mixed
+    test-type: secret
+type: Opaque
+stringData:
+  username: "random-user"
+  password: "random-password"
+  api-token: "token-for-agent-tests"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: random-agent-service
+  namespace: testing
+  labels:
+    test-scenario: crd-mixed
+    test-type: service
+spec:
+  type: ClusterIP
+  selector:
+    app: random-agent
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: random-agent-deployment
+  namespace: testing
+  labels:
+    test-scenario: crd-mixed
+    test-type: deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: random-agent
+  template:
+    metadata:
+      labels:
+        app: random-agent
+        test-scenario: crd-mixed
+    spec:
+      containers:
+      - name: random-agent
+        image: nginx:1.27-alpine
+        ports:
+        - name: http
+          containerPort: 80
+        env:
+        - name: APP_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: random-agent-config
+              key: APP_MODE
+        - name: API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: random-agent-secret
+              key: api-token
