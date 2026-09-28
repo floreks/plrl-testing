@@ -138,6 +138,11 @@ This directory contains comprehensive test cases for sync waves and hooks functi
     - All phases (pre-sync, sync, post-sync) with wave 0
     - Validates phase order is respected when waves are equal
 
+24. **28-sync-options** - Resource Retention and Detachment
+    - Tests `Prune=False`, `Delete=False`, and `detach` during manifest removal and service deletion
+    - Covers Plural and Argo annotations, the legacy lifecycle annotation, and default controls
+    - Follow `28-sync-options/README.md` for the staged checks and expected inventory state
+
 ## Annotation Reference
 
 ### Hook Phases
@@ -153,6 +158,11 @@ This directory contains comprehensive test cases for sync waves and hooks functi
 - **deployment.plural.sh/sync-hook-delete-policy**: hook-succeeded, hook-failed
 - **helm.sh/hook-delete-policy**: hook-succeeded, hook-failed
 
+### Sync Options
+- **deployment.plural.sh/sync-options**: `Prune=False`, `Delete=False`, `detach`
+- **argocd.argoproj.io/sync-options**: `Prune=False`, `Delete=False`
+- **client.lifecycle.config.k8s.io/deletion**: `detach` (legacy equivalent)
+
 ## Running Tests
 
 Each test has a corresponding ServiceDeployment in `services/agent/` directory:
@@ -167,6 +177,7 @@ Each test has a corresponding ServiceDeployment in `services/agent/` directory:
 - `10-hooks-waves.yaml.liquid`
 - `11-helm-hooks.yaml.liquid`
 - `12-argocd-waves.yaml.liquid`
+- `28-sync-options.yaml.liquid`
 - ... (etc)
 
 Deploy them to test the functionality in your cluster.

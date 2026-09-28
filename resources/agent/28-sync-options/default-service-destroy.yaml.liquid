@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sync-options-default-service-destroy
+  namespace: testing
+  labels:
+    scenario: sync-options
+data:
+  scenario: sync-options
+  case: default-service-destroy
+  value: stable

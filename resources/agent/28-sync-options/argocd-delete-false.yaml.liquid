@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sync-options-argocd-delete-false
+  namespace: testing
+  annotations:
+    argocd.argoproj.io/sync-options: Delete=False
+  labels:
+    scenario: sync-options
+data:
+  scenario: sync-options
+  case: argocd-delete-false
+  value: stable

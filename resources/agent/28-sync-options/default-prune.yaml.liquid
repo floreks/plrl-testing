@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sync-options-default-prune
+  namespace: testing
+  labels:
+    scenario: sync-options
+data:
+  scenario: sync-options
+  case: default-prune
+  value: stable
