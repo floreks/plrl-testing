@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: sync-options-legacy-detach
-  namespace: testing
-  annotations:
-    client.lifecycle.config.k8s.io/deletion: detach
-  labels:
-    scenario: sync-options
-data:
-  scenario: sync-options
-  case: legacy-lifecycle-detach
-  value: stable
+{% comment %}apiVersion: v1{% endcomment %}
+{% comment %}kind: ConfigMap{% endcomment %}
+{% comment %}metadata:{% endcomment %}
+  {% comment %}name: sync-options-legacy-detach{% endcomment %}
+  {% comment %}namespace: testing{% endcomment %}
+  {% comment %}annotations:{% endcomment %}
+    {% comment %}client.lifecycle.config.k8s.io/deletion: detach{% endcomment %}
+  {% comment %}labels:{% endcomment %}
+    {% comment %}scenario: sync-options{% endcomment %}
+{% comment %}data:{% endcomment %}
+  {% comment %}scenario: sync-options{% endcomment %}
+  {% comment %}case: legacy-lifecycle-detach{% endcomment %}
+  {% comment %}value: stable{% endcomment %}

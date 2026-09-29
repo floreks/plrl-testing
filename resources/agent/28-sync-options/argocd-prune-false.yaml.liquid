@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: sync-options-argocd-prune-false
-  namespace: testing
-  annotations:
-    argocd.argoproj.io/sync-options: " PRUNE = FALSE "
-  labels:
-    scenario: sync-options
-data:
-  scenario: sync-options
-  case: argocd-prune-false
-  value: stable
+{% comment %}apiVersion: v1{% endcomment %}
+{% comment %}kind: ConfigMap{% endcomment %}
+{% comment %}metadata:{% endcomment %}
+  {% comment %}name: sync-options-argocd-prune-false{% endcomment %}
+  {% comment %}namespace: testing{% endcomment %}
+  {% comment %}annotations:{% endcomment %}
+    {% comment %}argocd.argoproj.io/sync-options: " PRUNE = FALSE "{% endcomment %}
+  {% comment %}labels:{% endcomment %}
+    {% comment %}scenario: sync-options{% endcomment %}
+{% comment %}data:{% endcomment %}
+  {% comment %}scenario: sync-options{% endcomment %}
+  {% comment %}case: argocd-prune-false{% endcomment %}
+  {% comment %}value: stable{% endcomment %}

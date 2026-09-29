@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: sync-options-argocd-detach-negative-control
-  namespace: testing
-  annotations:
-    argocd.argoproj.io/sync-options: detach
-  labels:
-    scenario: sync-options
-data:
-  scenario: sync-options
-  case: argocd-detach-negative-control
-  value: stable
+{% comment %}apiVersion: v1{% endcomment %}
+{% comment %}kind: ConfigMap{% endcomment %}
+{% comment %}metadata:{% endcomment %}
+  {% comment %}name: sync-options-argocd-detach-negative-control{% endcomment %}
+  {% comment %}namespace: testing{% endcomment %}
+  {% comment %}annotations:{% endcomment %}
+    {% comment %}argocd.argoproj.io/sync-options: detach{% endcomment %}
+  {% comment %}labels:{% endcomment %}
+    {% comment %}scenario: sync-options{% endcomment %}
+{% comment %}data:{% endcomment %}
+  {% comment %}scenario: sync-options{% endcomment %}
+  {% comment %}case: argocd-detach-negative-control{% endcomment %}
+  {% comment %}value: stable{% endcomment %}

@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: sync-options-plural-delete-false-prune-control
-  namespace: testing
-  annotations:
-    deployment.plural.sh/sync-options: Delete=False
-  labels:
-    scenario: sync-options
-data:
-  scenario: sync-options
-  case: plural-delete-false-prune-control
-  value: stable
+{% comment %}apiVersion: v1{% endcomment %}
+{% comment %}kind: ConfigMap{% endcomment %}
+{% comment %}metadata:{% endcomment %}
+  {% comment %}name: sync-options-plural-delete-false-prune-control{% endcomment %}
+  {% comment %}namespace: testing{% endcomment %}
+  {% comment %}annotations:{% endcomment %}
+    {% comment %}deployment.plural.sh/sync-options: Delete=False{% endcomment %}
+  {% comment %}labels:{% endcomment %}
+    {% comment %}scenario: sync-options{% endcomment %}
+{% comment %}data:{% endcomment %}
+  {% comment %}scenario: sync-options{% endcomment %}
+  {% comment %}case: plural-delete-false-prune-control{% endcomment %}
+  {% comment %}value: stable{% endcomment %}
