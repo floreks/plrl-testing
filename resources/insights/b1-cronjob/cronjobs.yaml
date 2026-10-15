@@ -31,3 +31,31 @@ spec:
                   valueFrom: {configMapKeyRef: {name: cron-mode, key: mode}}
               resources:
                 requests: {cpu: 5m, memory: 8Mi}
+---
+# Same job, but successful jobs are deleted at once. After a failure and a later success the only retained job is
+# the old failed one, which must not keep the CronJob reported as failing (status.lastSuccessfulTime is newer).
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-nohistory
+  labels: {e2e: insights}
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: main
+              image: busybox:1.37
+              command: ["sh", "-c", 'if [ "$MODE" = ok ]; then echo ok; exit 0; fi; echo failing; exit 1']
+              env:
+                - name: MODE
+                  valueFrom: {configMapKeyRef: {name: cron-mode, key: mode}}
+              resources:
+                requests: {cpu: 5m, memory: 8Mi}
