@@ -1,0 +1,45 @@
+# Deployed by a Plural service, so it carries the owning-inventory annotation.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: managed-crashloop
+  labels: {app: managed-crashloop, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: managed-crashloop}
+  template:
+    metadata:
+      labels: {app: managed-crashloop, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: managed-sts
+  labels: {app: managed-sts, e2e: insights}
+spec:
+  replicas: 2
+  serviceName: managed-sts
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels: {app: managed-sts}
+  template:
+    metadata:
+      labels: {app: managed-sts, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}

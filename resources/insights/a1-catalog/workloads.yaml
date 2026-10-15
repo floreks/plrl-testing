@@ -1,0 +1,86 @@
+# Names are what the catalog matches on. None of these are the real components: they only crashloop.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns
+  labels: {app: coredns, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: coredns}
+  template:
+    metadata:
+      labels: {app: coredns, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-nginx-controller
+  labels: {app: ingress-nginx-controller, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: ingress-nginx-controller}
+  template:
+    metadata:
+      labels: {app: ingress-nginx-controller, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager-webhook
+  labels: {app: cert-manager-webhook, e2e: insights}
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: cert-manager-webhook}
+  template:
+    metadata:
+      labels: {app: cert-manager-webhook, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: aws-node
+  labels: {app: aws-node, e2e: insights}
+spec:
+  selector:
+    matchLabels: {app: aws-node}
+  template:
+    metadata:
+      labels: {app: aws-node, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}

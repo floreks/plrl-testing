@@ -1,0 +1,35 @@
+# kind has no metrics-server, so the HPA can not read metrics: ScalingActive=False/FailedGetResourceMetric, which the agent reports as degraded.
+# The autoscaling API is served as v1 and v2: the HPA must still be one root, and one penalty.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hpa-target
+  labels: {app: hpa-target, e2e: insights}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hpa-target}
+  template:
+    metadata:
+      labels: {app: hpa-target, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", "exec sleep 86400"]
+          resources:
+            requests: {cpu: 50m, memory: 8Mi}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-degraded
+  labels: {e2e: insights}
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: hpa-target}
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource: {name: cpu, target: {type: Utilization, averageUtilization: 50}}

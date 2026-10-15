@@ -1,0 +1,99 @@
+# A plain app that would be MEDIUM, pinned up.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pin-critical
+  annotations:
+    deployments.plural.sh/insight-priority: 'CRITICAL'
+  labels: {app: pin-critical, e2e: insights}
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: pin-critical}
+  template:
+    metadata:
+      labels: {app: pin-critical, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+# Must disappear from the list and from the health score.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pin-ignore
+  annotations:
+    deployments.plural.sh/insight-priority: 'IGNORE'
+  labels: {app: pin-ignore, e2e: insights}
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: pin-ignore}
+  template:
+    metadata:
+      labels: {app: pin-ignore, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+# Not a valid value: ignored, the built-in priority applies.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pin-invalid
+  annotations:
+    deployments.plural.sh/insight-priority: 'urgent'
+  labels: {app: pin-invalid, e2e: insights}
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: pin-invalid}
+  template:
+    metadata:
+      labels: {app: pin-invalid, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+# Values are case insensitive.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pin-lowercase
+  annotations:
+    deployments.plural.sh/insight-priority: 'high'
+  labels: {app: pin-lowercase, e2e: insights}
+spec:
+  replicas: 1
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: pin-lowercase}
+  template:
+    metadata:
+      labels: {app: pin-lowercase, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}

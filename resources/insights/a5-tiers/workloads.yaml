@@ -1,0 +1,99 @@
+# Namespace tier: kube-system is HIGH. Partial outage, so it stays HIGH instead of being lifted.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tier-kube-system
+  namespace: kube-system
+  labels: {app: tier-kube-system, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: tier-kube-system}
+  template:
+    metadata:
+      labels: {app: tier-kube-system, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels: {app: tier-kube-system}
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'case "$NODE_NAME" in *-worker2) echo "failing on $NODE_NAME"; exit 1;; *) exec sleep 86400;; esac']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+          env:
+            - name: NODE_NAME
+              valueFrom: {fieldRef: {fieldPath: spec.nodeName}}
+---
+# Namespace tier: cert-manager is CRITICAL.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tier-cert-manager
+  namespace: cert-manager
+  labels: {app: tier-cert-manager, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: tier-cert-manager}
+  template:
+    metadata:
+      labels: {app: tier-cert-manager, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels: {app: tier-cert-manager}
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'case "$NODE_NAME" in *-worker2) echo "failing on $NODE_NAME"; exit 1;; *) exec sleep 86400;; esac']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+          env:
+            - name: NODE_NAME
+              valueFrom: {fieldRef: {fieldPath: spec.nodeName}}
+---
+# A system-* priority class beats every other rule, so this is CRITICAL even with a partial outage.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tier-priorityclass
+  namespace: kube-system
+  labels: {app: tier-priorityclass, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: tier-priorityclass}
+  template:
+    metadata:
+      labels: {app: tier-priorityclass, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      priorityClassName: system-cluster-critical
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels: {app: tier-priorityclass}
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'case "$NODE_NAME" in *-worker2) echo "failing on $NODE_NAME"; exit 1;; *) exec sleep 86400;; esac']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+          env:
+            - name: NODE_NAME
+              valueFrom: {fieldRef: {fieldPath: spec.nodeName}}

@@ -1,0 +1,9 @@
+# Stands in for a custom resource that an operator turns into workloads. It is deployed by a Plural service,
+# so it carries the owning-inventory annotation. scripts/c3-owned.sh then creates a failing Deployment owned by it.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: operator-cr
+  labels: {e2e: insights}
+data:
+  purpose: owner of a failing deployment

@@ -1,0 +1,15 @@
+# The target does not exist, so the first condition is AbleToScale=False/FailedGetScale.
+# The agent's HPA check returns on the first healthy or degraded condition, so unlike
+# hpa-degraded (AbleToScale=True first, then ScalingActive=False) this one is reported as degraded.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-missing-target
+  labels: {e2e: insights}
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: does-not-exist}
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource: {name: cpu, target: {type: Utilization, averageUtilization: 50}}

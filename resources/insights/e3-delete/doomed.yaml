@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doomed
+  labels: {app: doomed, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: doomed}
+  template:
+    metadata:
+      labels: {app: doomed, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}

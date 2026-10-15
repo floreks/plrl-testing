@@ -1,0 +1,33 @@
+# The mode decides whether the next job succeeds. Patch it to "ok" to see the CronJob recover.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cron-mode
+data:
+  mode: fail
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-flaky
+  labels: {e2e: insights}
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: main
+              image: busybox:1.37
+              command: ["sh", "-c", 'if [ "$MODE" = ok ]; then echo ok; exit 0; fi; echo failing; exit 1']
+              env:
+                - name: MODE
+                  valueFrom: {configMapKeyRef: {name: cron-mode, key: mode}}
+              resources:
+                requests: {cpu: 5m, memory: 8Mi}

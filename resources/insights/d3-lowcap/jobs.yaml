@@ -1,0 +1,679 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-01
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-02
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-03
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-04
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-05
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-06
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-07
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-08
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-09
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-10
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-11
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-12
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-13
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-14
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-15
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-16
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-17
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-18
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-19
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-20
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-21
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-22
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-23
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-24
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-25
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-26
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-27
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-28
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-29
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-30
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-31
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-32
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-33
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-34
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-35
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-36
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-37
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-38
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-39
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-40
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}

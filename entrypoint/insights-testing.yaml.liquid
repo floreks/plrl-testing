@@ -1,0 +1,56 @@
+{% comment %}
+  One entrypoint for both clusters. Configuration (all optional):
+    clusters:  comma separated Plural cluster handles, default "insights-base,insights-head"
+    scenarios: comma separated scenario ids, one ServiceDeployment per cluster and scenario.
+               Start with an empty list and add scenarios one group at a time, see the test plan.
+{% endcomment %}
+{% assign namespace = "testing" %}
+{% assign name = "insights-testing" %}
+{% assign clusters = configuration.clusters | default: "insights-base,insights-head" | split: "," %}
+{% assign scenarios = configuration.scenarios | default: "" | split: "," %}
+
+apiVersion: deployments.plural.sh/v1alpha1
+kind: GitRepository
+metadata:
+    name: {{ name }}
+    namespace: {{ namespace }}
+spec:
+    url: https://github.com/floreks/plrl-testing.git
+
+{% for cluster in clusters %}
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: Cluster
+metadata:
+    name: {{ cluster }}
+    namespace: {{ namespace }}
+spec:
+    handle: {{ cluster }}
+{% endfor %}
+
+{% for cluster in clusters %}{% for scenario in scenarios %}{% if scenario != "" %}
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+    name: ins-{{ scenario }}-{{ cluster }}
+    namespace: {{ namespace }}
+spec:
+    namespace: ins-{{ scenario }}
+    repositoryRef:
+        name: {{ name }}
+    {% if scenario == "c2-flux-install" %}
+    helm:
+        url: https://fluxcd-community.github.io/helm-charts
+        version: x.x.x
+        chart: flux2
+    {% else %}
+    git:
+        folder: resources/insights/{{ scenario }}
+        ref: main
+    {% endif %}
+    clusterRef:
+        kind: Cluster
+        name: {{ cluster }}
+        namespace: {{ namespace }}
+{% endif %}{% endfor %}{% endfor %}

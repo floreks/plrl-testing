@@ -1,0 +1,66 @@
+# Labelled tier=core
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-checkout
+  labels: {app: shop-checkout, e2e: insights, tier: core}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: shop-checkout}
+  template:
+    metadata:
+      labels: {app: shop-checkout, e2e: insights, tier: core}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-batch
+  labels: {app: shop-batch, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: shop-batch}
+  template:
+    metadata:
+      labels: {app: shop-batch, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sandbox-experiment
+  labels: {app: sandbox-experiment, e2e: insights}
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  selector:
+    matchLabels: {app: sandbox-experiment}
+  template:
+    metadata:
+      labels: {app: sandbox-experiment, e2e: insights}
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}

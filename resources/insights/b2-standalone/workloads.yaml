@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-failed
+  labels: {e2e: insights}
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: main
+          image: busybox:1.37
+          command: ["sh", "-c", 'echo "failing on $(hostname)"; exit 1']
+          resources:
+            requests: {cpu: 5m, memory: 8Mi}
+---
+# A bare pod: nothing owns it, so it is its own root.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-standalone
+  labels: {e2e: insights}
+spec:
+  terminationGracePeriodSeconds: 0
+  containers:
+    - name: main
+      image: busybox:1.37
+      command: ["sh", "-c", "echo failing; exit 1"]
+      resources:
+        requests: {cpu: 5m, memory: 8Mi}
